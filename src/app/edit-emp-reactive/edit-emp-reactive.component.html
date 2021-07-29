@@ -1,0 +1,73 @@
+<h2>Edit Employee</h2>
+<div class="block">
+  <h2>Edit Employee</h2>
+  <form [formGroup]="empForm" (ngSubmit)="onSubmit(empForm.value)">
+    <label for="name"><b>Name </b></label>
+    <br />
+    <input id="name" type="text" name="name" formControlName="Name" />
+    <div *ngIf="submitted && f.Name?.errors">
+      <div class="error" *ngIf="f.Name?.errors?.minlength ">Name must be atleast 4 charecter long.</div>
+      <div class="error" *ngIf="f.Name?.errors?.maxlength ">Name can have max 20 charecter long.</div>
+      <div class="error" *ngIf="f.Name?.errors?.required">Name is required</div>
+    </div>
+    <br />
+    <label for="salary"><b>Salary </b></label>
+    <br />
+    <input id="salary" type="number" name="Salary" formControlName="Salary" />
+    <div *ngIf="submitted && f.Salary?.errors">
+      <div class="error" *ngIf="f.Salary?.errors?.min">Minimum salary should be {{30000 | currency:"INR":true}}</div>
+      <div class="error" *ngIf="f.Salary?.errors?.required">Salary is Required</div>
+    </div>
+    <br />
+    <label for="permanent"><b>Is Permanent or not? </b></label>
+    <br />
+    <input id="permanentYes" type="radio" name="Permanent" [value]="true" formControlName="Permanent" /> Yes
+    <input id="permanentNo" type="radio" name="Permanent" [value]="false" formControlName="Permanent" /> No
+
+    <div *ngIf="submitted && f.Parmanent?.errors">
+      <div class="error" *ngIf="f.Salary?.errors?.required">Salary is Required</div>
+    </div>
+    <br />
+    <label for="department"><b>Select Department </b></label>
+    <select id="department" formControlName="Department">
+      <option *ngFor="let department of departments"
+              [ngValue]="department"
+              [selected]="department.Id === employee.Department.Id">
+
+        {{department.Name}}
+
+      </option>
+    </select>
+
+    <div formArrayName="Skills">
+      <label for="addskill"><b>Skill Set </b></label>
+      <button type="button" (click)="addSkill()">Add Skill</button>
+      <div *ngFor="let skill of Skill.controls;let i=index">
+        <div [formGroupName]="i">
+          <label for="skillname">Skill Name</label>
+          <input type="text" name="name" id="skillname" formControlName="Name"/>
+          <div class="error" *ngIf="skill.get('Name')?.errors?.required">Skill Name is Manditory</div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <button type="submit">Save</button>
+  </form>
+</div>
+<div class="block">
+
+  <strong>Employee Model</strong><br>
+
+<pre>{{employee | json }}</pre>
+
+</div>
+
+<div class="block">
+
+  <strong>Angular Generated Form Model</strong><br>
+
+<pre>{{empForm.value | json}}</pre>
+
+</div>

@@ -1,0 +1,20 @@
+<h2>ID :{{employee.ID}}</h2>
+<h2>Name : {{employee.Name}}</h2>
+<h2>Salary: {{employee.Salary | currency:"INR":true}}</h2>
+<h2 *ngIf="employee.Permanent">Permanent : Yes</h2>
+<h2>Department Id : {{employee.Department.Id}}</h2>
+<h2 id="departmentName">Department Name : {{employee.Department.Name}}</h2>
+<h1>Skills</h1>
+<table>
+  <tr>
+    <th>Skill Id</th>
+    <th>Skill Name</th>
+  </tr>
+  <tr *ngFor="let skill of employee.Skills">
+    <td>{{skill.Id}}</td>
+    <td>{{skill.Name}}</td>
+  </tr>
+</table>
+<h2>Date Of Birth : {{employee.dateOfBirth | date : 'mediumDate'  }}</h2>
+<br />
+<a [routerLink]="['/Employee']">Back to List</a>

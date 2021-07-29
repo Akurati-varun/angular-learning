@@ -1,0 +1,6 @@
+<h1>Simple Button Click event!!</h1>
+<input type="number" [(ngModel)]="data"/>
+<button id="clickMe" (click)="onClick()">Add</button>
+<p id="simpleClick">{{button}}</p>
+<h1>Quality Selector</h1>
+<button type="button" (click)="onMinus()" [disabled]="zero">-</button><input type="number" id="result" [value]="data" [(ngModel)]="data"/><button type="button" id="plus" (click)="onPlus()">+</button>

@@ -1,0 +1,12 @@
+<h2>Employees List</h2>
+<label for="search">Search </label>
+<input id="search" name="search" #searched [(ngModel)]="searchKey" (keyup)="search($event)" type="text"/>
+<br />
+<br />
+<div class="card" *ngFor="let emp of filteredEmployees">
+   <h1>{{emp.Name}}</h1>
+   <p>{{emp.Salary | currency:"INR":true}}</p>
+  <a [routerLink]="['/EditEmployeeReactive',emp.ID]">Edit</a>
+  <br />
+  <a [routerLink]="['/ViewEmpoloyee',emp.ID]">Emp-Info</a>
+</div>
